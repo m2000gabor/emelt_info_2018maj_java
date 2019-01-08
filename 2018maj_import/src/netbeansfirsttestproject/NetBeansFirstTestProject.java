@@ -23,7 +23,8 @@ public class NetBeansFirstTestProject {
         int userInput=0;
         
       try
-    {  File file = new File("C:\\Users\\test\\Documents\\NetBeansProjects\\NetBeansFirstTestProject\\ajto.txt");
+    { String workingDic = System.getProperty("user.dir");
+        File file = new File(workingDic+"\\ajto.txt");
         Scanner inputReader = new Scanner(file);
        for(int x =0;inputReader.hasNextInt();x++){
            inputReader.nextInt();inputReader.nextInt();inputReader.nextInt();inputReader.next();
@@ -59,7 +60,7 @@ public class NetBeansFirstTestProject {
         int res =harmadik(x,emberek);
         if(res!=0){arr3[x-1]=x + " "+Integer.toString(res)+" \r\n";}
         }
-        Formatter formatter = new Formatter("C:\\Users\\test\\Documents\\NetBeansProjects\\NetBeansFirstTestProject\\athaladas.txt");
+        Formatter formatter = new Formatter(workingDic+"\\athaladas.txt");
         //for(int y=0;y<100;y++){System.out.println(arr3[y]);}
         for(int y=0;y<100;y++){if(arr3[y]!=null){formatter.format("%s", arr3[y]);}} 
         formatter.close();
