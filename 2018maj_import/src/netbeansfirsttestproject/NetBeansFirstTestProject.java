@@ -19,37 +19,13 @@ public class NetBeansFirstTestProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int hossz =0;
-        int userInput=0;
-        
-      try
-    { String workingDic = System.getProperty("user.dir");
-        File file = new File(workingDic+"\\ajto.txt");
-        Scanner inputReader = new Scanner(file);
-       for(int x =0;inputReader.hasNextInt();x++){
-           inputReader.nextInt();inputReader.nextInt();inputReader.nextInt();inputReader.next();
-           hossz++;
-       }
-       
-        Ember[] emberek = new Ember[hossz]; 
-        Scanner sc = new Scanner(file);
-    
-        
-        for(int x=0;sc.hasNext();x++){
-          Ember emb = new Ember(sc.nextInt(),sc.nextInt(),sc.nextInt(),sc.next());
-          emberek[x]=emb; }
-        
-        //input teszt
-        /*for(int y = 0 ;y<hossz ;y++){
-        Ember e = emberek[y];
-        String output = Integer.toString(e.getHour())+" "+Integer.toString(e.getMin()) +" "+Integer.toString(e.getId())+" "+e.getDirection();
-        System.out.println(output);
-        }*/
-       
+
+        String workingDic = System.getProperty("user.dir");
+        Ember[] emberek =beolvasas(workingDic);
         
         //masodik feladat
         int uccsoKi = 00;
-        for(int x=hossz-1; emberek[x].getDirection().equals("be") ;x--){
+        for(int x=emberek.length-1; emberek[x].getDirection().equals("be") ;x--){
             uccsoKi=emberek[x-1].getId(); }       
         System.out.println("2. Feladat\nAz első belépő: "+ emberek[0].getId() + "\nAz utolsó kilépő: " + uccsoKi);
 
@@ -60,10 +36,9 @@ public class NetBeansFirstTestProject {
         int res =harmadik(x,emberek);
         if(res!=0){arr3[x-1]=x + " "+Integer.toString(res)+" \r\n";}
         }
-        Formatter formatter = new Formatter(workingDic+"\\athaladas.txt");
-        //for(int y=0;y<100;y++){System.out.println(arr3[y]);}
+        try{Formatter formatter = new Formatter(workingDic+"\\athaladas.txt");
         for(int y=0;y<100;y++){if(arr3[y]!=null){formatter.format("%s", arr3[y]);}} 
-        formatter.close();
+        formatter.close();}catch( IOException e ){ System.out.println("Az írás kérése nem hajtható végre");}
         
         
         //negyedik feladat
@@ -74,22 +49,41 @@ public class NetBeansFirstTestProject {
         }}
         System.out.print("\n");
         
+         
         //otodik feladat
         System.out.println("Például "+otodik(emberek)+ "-kor voltak a legtöbben a társalgóban.");
         
  
-        
-    }catch( IOException e ){ System.out.println("A keresett fájl nem található");}
-      
         //hatodik feladat
-        System.out.print("Adja meg a személy azonosítóját! ");
-        Scanner userInpSc = new Scanner(System.in);
-        userInput = userInpSc.nextInt();
-        System.out.print(userInput+"\n");
+        int userInput = hatodik();
+        
+        //hetedik feladat
+        
         
         
 }
     
+    public static Ember[] beolvasas(String workingDictionary){
+       int hossz =0;
+      try
+    { 
+        File file = new File(workingDictionary+"\\ajto.txt");
+        Scanner inputReader = new Scanner(file);
+       for(int x =0;inputReader.hasNextInt();x++){
+           inputReader.nextInt();inputReader.nextInt();inputReader.nextInt();inputReader.next();
+           hossz++;
+       }
+       
+         Ember[] emberek = new Ember[hossz]; 
+        Scanner sc = new Scanner(file);
+    
+        for(int x=0;sc.hasNext();x++){
+          Ember emb = new Ember(sc.nextInt(),sc.nextInt(),sc.nextInt(),sc.next());
+          emberek[x]=emb; }
+         return emberek;
+      }catch( IOException e ){ System.out.println("A keresett fájl nem található");}
+     return null;
+}
     public static int harmadik(int id, Ember[] emb){
         int elofordulas =0;
         for(int x =0;x<emb.length;x++){
@@ -126,5 +120,12 @@ public class NetBeansFirstTestProject {
     }
     System.out.println("Letszam maximuma:"+rekordLetszam);
     return rekordTime.toString();}
-    
+    public static int hatodik(){
+        
+        System.out.print("Adja meg a személy azonosítóját! ");
+        Scanner userInpSc = new Scanner(System.in);
+        int inp = userInpSc.nextInt();
+        System.out.print(inp+"\n");
+        return inp;
+    }
 }
