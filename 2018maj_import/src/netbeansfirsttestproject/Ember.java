@@ -15,10 +15,10 @@ import java.util.concurrent.TimeUnit;
  
 public class Ember
 {
-  private int hour;
-  private int min;
-  private int id;
-  private String direction;
+  private final int hour;
+  private final int min;
+  private final int id;
+  private final String direction;
   private final Time ido;
    
   public Ember(int ora,int perc, int azon, String irany)
