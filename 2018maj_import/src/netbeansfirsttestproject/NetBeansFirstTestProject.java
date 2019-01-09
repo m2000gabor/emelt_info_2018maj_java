@@ -7,6 +7,8 @@ package netbeansfirsttestproject;
 
 import java.io.*;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import static java.time.temporal.ChronoField.MILLI_OF_SECOND;
 import java.util.*;
 
 /**
@@ -23,6 +25,7 @@ public class NetBeansFirstTestProject {
         String workingDic = System.getProperty("user.dir");
         Ember[] emberek =beolvasas(workingDic);
         int recordsLenght = emberek.length;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         
         //masodik feladat
         int uccsoKi = 00;
@@ -46,8 +49,7 @@ public class NetBeansFirstTestProject {
         System.out.print("\n4. Feladat\nA végén a társalgóban voltak: ");
         for(int x =0;x<100;x++){
         if(negyedik(emberek)[x]!=0){
-            System.out.print(negyedik(emberek)[x]+" ");
-        }}
+        System.out.print(negyedik(emberek)[x]+" ");}}
         System.out.print("\n");
         
          
@@ -59,7 +61,7 @@ public class NetBeansFirstTestProject {
         int userInputId = hatodik();
         
         //hetedik feladat
-        System.out.println("\n7. Feladat");
+        System.out.print("\n7. Feladat");
         Time[] idopontok =new Time[recordsLenght];
         int elofordulas =0;
         for(int x=0;x<recordsLenght;x++){
@@ -70,14 +72,19 @@ public class NetBeansFirstTestProject {
         }
         for(int x=0;x<recordsLenght;x++){
         if(idopontok[x]!=null){
-            System.out.print(idopontok[x].toString() +"-");}
+            System.out.print("\n"+sdf.format(idopontok[x]) +"-");}
         x++;
         if(idopontok[x]!=null){
-            System.out.println(idopontok[x].toString());}
+            System.out.print(sdf.format(idopontok[x]));}
         }
         
         //nyolcadik feladat
-        
+        sdf.applyPattern("mm");
+        String bentIdo =sdf.format(new Time(nyolcadikIdo(idopontok,elofordulas)-3600000));
+        String vegen ="a megfigyelési időszak végén nem volt bent a társalgóban.";
+        if(nyolcadikBool(elofordulas)){vegen="a megfigyelés végén a társalgóban volt.";}
+        System.out.println("\n\n8. Feladat");
+        System.out.println("A(z) "+ userInputId +". személy összesen "+bentIdo+" percet volt bent, "+vegen);
 }
     
     public static Ember[] beolvasas(String workingDictionary){
@@ -123,7 +130,6 @@ public class NetBeansFirstTestProject {
         if(pozicio){ret[retActLength]=x;retActLength++;}
         }
     return ret;}
-    
     public static String otodik(Ember[] adat){
     String ret ="unknown";
     int rekordLetszam = 0;
@@ -138,7 +144,6 @@ public class NetBeansFirstTestProject {
     }
     //System.out.println("Letszam maximuma:"+rekordLetszam);
     return rekordTime.toString();}
-    
     public static int hatodik(){
         System.out.print("\n6. Feladat\nAdja meg a személy azonosítóját! ");
         Scanner userInpSc = new Scanner(System.in);
@@ -146,4 +151,14 @@ public class NetBeansFirstTestProject {
        // System.out.print(inp+"\n");
         return inp;
     }
+    public static long nyolcadikIdo(Time[] idok,int elof){
+    long osszesen =0;  
+    long kulonbseg;
+    for(int x=0;x<elof;x++){
+    if(idok[x+1]!=null){kulonbseg=idok[x+1].getTime()-idok[x].getTime();
+    x++;}
+    else{kulonbseg=50400000-idok[x].getTime();}
+    osszesen=osszesen+kulonbseg;}
+    return osszesen;}
+    public static boolean nyolcadikBool(int eloford){return eloford%2 ==1;}
 }
