@@ -22,10 +22,11 @@ public class NetBeansFirstTestProject {
 
         String workingDic = System.getProperty("user.dir");
         Ember[] emberek =beolvasas(workingDic);
+        int recordsLenght = emberek.length;
         
         //masodik feladat
         int uccsoKi = 00;
-        for(int x=emberek.length-1; emberek[x].getDirection().equals("be") ;x--){
+        for(int x=recordsLenght-1; emberek[x].getDirection().equals("be") ;x--){
             uccsoKi=emberek[x-1].getId(); }       
         System.out.println("2. Feladat\nAz első belépő: "+ emberek[0].getId() + "\nAz utolsó kilépő: " + uccsoKi);
 
@@ -55,11 +56,27 @@ public class NetBeansFirstTestProject {
         
  
         //hatodik feladat
-        int userInput = hatodik();
+        int userInputId = hatodik();
         
         //hetedik feladat
+        System.out.println("\n7. Feladat");
+        Time[] idopontok =new Time[recordsLenght];
+        int elofordulas =0;
+        for(int x=0;x<recordsLenght;x++){
+        Ember actualItem =emberek[x];    
+        if(actualItem.getId()==userInputId){
+            idopontok[elofordulas]= actualItem.getIdo();
+            elofordulas++;}
+        }
+        for(int x=0;x<recordsLenght;x++){
+        if(idopontok[x]!=null){
+            System.out.print(idopontok[x].toString() +"-");}
+        x++;
+        if(idopontok[x]!=null){
+            System.out.println(idopontok[x].toString());}
+        }
         
-        
+        //nyolcadik feladat
         
 }
     
