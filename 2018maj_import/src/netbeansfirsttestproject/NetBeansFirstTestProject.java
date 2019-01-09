@@ -42,7 +42,7 @@ public class NetBeansFirstTestProject {
         
         
         //negyedik feladat
-        System.out.print("A végén a társalgóban voltak: ");
+        System.out.print("\n4. Feladat\nA végén a társalgóban voltak: ");
         for(int x =0;x<100;x++){
         if(negyedik(emberek)[x]!=0){
             System.out.print(negyedik(emberek)[x]+" ");
@@ -51,7 +51,7 @@ public class NetBeansFirstTestProject {
         
          
         //otodik feladat
-        System.out.println("Például "+otodik(emberek)+ "-kor voltak a legtöbben a társalgóban.");
+        System.out.println("\n5. Feladat\nPéldául "+otodik(emberek)+ "-kor voltak a legtöbben a társalgóban.");
         
  
         //hatodik feladat
@@ -106,6 +106,7 @@ public class NetBeansFirstTestProject {
         if(pozicio){ret[retActLength]=x;retActLength++;}
         }
     return ret;}
+    
     public static String otodik(Ember[] adat){
     String ret ="unknown";
     int rekordLetszam = 0;
@@ -118,14 +119,14 @@ public class NetBeansFirstTestProject {
     
     if(actualLetszam>rekordLetszam){rekordTime = actE.getIdo(); rekordLetszam=actualLetszam;}
     }
-    System.out.println("Letszam maximuma:"+rekordLetszam);
+    //System.out.println("Letszam maximuma:"+rekordLetszam);
     return rekordTime.toString();}
+    
     public static int hatodik(){
-        
-        System.out.print("Adja meg a személy azonosítóját! ");
+        System.out.print("\n6. Feladat\nAdja meg a személy azonosítóját! ");
         Scanner userInpSc = new Scanner(System.in);
         int inp = userInpSc.nextInt();
-        System.out.print(inp+"\n");
+       // System.out.print(inp+"\n");
         return inp;
     }
 }
